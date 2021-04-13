@@ -1,0 +1,56 @@
+﻿@model StudentEvidence.Models.IspitModel
+@{
+    ViewBag.Title = "AddIspit";
+}
+
+<h2>AddIspit</h2>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body mx-auto">
+            @using (Html.BeginForm("AddIspit", "Ispit", FormMethod.Post, new { @class = "form-horizontal" }))
+            { 
+
+            <div class="form-group row">
+                <label class="col-form-label text-primary"><small>Ocena:</small></label>
+                @Html.TextBoxFor(x => x.Ocena, new { @class = "form-control", placeholder = "Ocena:", @type = "number", min = "5", max = "10" })
+                @Html.ValidationMessageFor(x => x.Ocena, null, new { @style = "color:Red;" })
+            </div>
+
+                <div class="form-group">
+                    <label class="col-form-label text-primary"><small>DatumPolaganja-(@Model.DatumPolaganja.ToShortDateString().Replace("/", ".")):</small></label>
+                    <div class=" form-group">
+                        @Html.TextBoxFor(x => x.DatumPolaganja, new { @class = "control-label" })
+                        @Html.ValidationMessageFor(x => x.DatumPolaganja, null, new { @style = "color:Red;" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="row">
+                        <label class="col-form-label text-primary"><small>Naziv Predmeta:</small></label>
+                    </div>
+                    <div class="row">
+                        @Html.DropDownListFor(x => x.PredmetID, Model.Predmets.Select(x => new SelectListItem() { Text = x.Naziv, Value = x.ID.ToString() }))
+                        @Html.ValidationMessageFor(x => x.PredmetID, null, new { @style = "color:Red;" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="row">
+                        <label class="col-form-label text-primary"><small>Student:</small></label>
+                    </div>
+                    <div class="row">
+                        @Html.DropDownListFor(x => x.StudentID, Model.Studenti.Select(x => new SelectListItem() { Text = x.Ime + " " + x.Prezime, Value = x.ID.ToString() }))
+                        @Html.ValidationMessageFor(x => x.StudentID, null, new { @style = "color:Red;" })
+                    </div>
+                </div>
+                 
+                <div class="form-group row">
+                    <div>
+
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

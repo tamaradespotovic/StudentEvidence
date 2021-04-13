@@ -1,0 +1,32 @@
+﻿@model StudentEvidence.Models.PredmetModel 
+@{
+    ViewBag.Title = "EditPredmet";
+}
+
+<h2>EditPredmet</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-body mx-auto">
+            @using (Html.BeginForm("EditPredmet", "Predmet", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.ID)
+
+            <div class="form-group row">
+                <label class="col-form-label text-primary"><small>Naziv predmeta:</small></label>
+                @Html.TextBoxFor(x => x.Naziv, new { @class = "form-control", placeholder = "Naziv Predmeta:", @value = Model.Naziv })
+                @Html.ValidationMessageFor(x => x.Naziv, null, new { @style = "color:Red;" })
+
+            </div>
+
+
+                <div class="form-group row">
+                    <div>
+
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

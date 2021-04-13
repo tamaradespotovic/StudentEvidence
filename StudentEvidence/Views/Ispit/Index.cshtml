@@ -1,0 +1,41 @@
+﻿@model List<StudentEvidence.Models.IspitModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    @Html.ActionLink("Dodaj ispit", "AddIspit", "Ispit", new { @class = "btn btn-info btn-sm" })
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Ime i Prezime</th>
+            <th scope="col">Naziv Predmeta</th>
+            <th scope="col">Ocena</th>
+            <th scope="col">Datum Polaganja</th> 
+            <th scope="col">Action</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th></th>
+                <th scope="row">@item.ID</th>
+                <th scope="row">@(item.Student.Ime+" "+item.Student.Prezime)</th>
+                <th scope="row">@(item.Predmet.Naziv)</th>
+                <td>@item.Ocena</td>
+                <td>@item.DatumPolaganja</td> 
+                <td> 
+                    @Html.ActionLink("Edit", "EditIspit", "Ispit", new { ID = item.ID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Delete", "DeleteIspit", "Ispit", new { ID = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                     
+                </td> 
+            </tr>
+        } 
+    </tbody>
+</table> 
+

@@ -1,0 +1,40 @@
+﻿@model StudentEvidence.Models.UserModel
+@{
+    ViewBag.Title = "Login";
+}
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+<hr />
+<div class="w-25 mx-auto">
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="mb-3">
+            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User name:" })
+        </div>
+        <div class="mb-3">
+            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "Password:", type = "password" })
+            <div><input type="checkbox" onclick="visiblePassword()">Show Password</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div style="color:red;list-style:none;">
+            @Html.ValidationSummary()
+        </div>
+    }
+</div>
+
+<script>
+    function visiblePassword() {
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    } 
+    $(document).ready(function () {
+        visiblePassword();
+    })
+</script>

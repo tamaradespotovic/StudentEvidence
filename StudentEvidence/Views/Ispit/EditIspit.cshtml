@@ -1,0 +1,70 @@
+﻿@model StudentEvidence.Models.IspitModel
+@{
+    ViewBag.Title = "EditIspit";
+}
+
+<h2>EditIspit - @Model.Predmet.Naziv</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-body mx-auto">
+            @using (Html.BeginForm("EditIspit", "Ispit", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(x => x.ID)
+
+                <div class="form-group row">
+                    <label class="col-form-label text-primary"><small>Ocena:</small></label>
+                    @Html.TextBoxFor(x => x.Ocena, new { @class = "form-control", placeholder = "Ocena:" , @type = "number", min = "5", max = "10" })
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label text-primary"><small>DatumPolaganja-(@Model.DatumPolaganja.ToShortDateString().Replace("/", ".")):</small></label>
+                    <div class=" form-group">
+                        @Html.TextBoxFor(x => x.DatumPolaganja, new { @class = "control-label", @value = Model.DatumPolaganja})
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="row">
+                        <label class="col-form-label text-primary"><small>Naziv Predmeta:</small></label>
+                    </div>
+                    <div class="row">
+                        @Html.DropDownListFor(x => x.PredmetID, Model.Predmets.Select(x => new SelectListItem() { Text = x.Naziv, Value = x.ID.ToString() }))
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="row">
+                        <label class="col-form-label text-primary"><small>Student:</small></label>
+                    </div>
+                    <div class="row">
+                        @Html.DropDownListFor(x => x.StudentID, Model.Studenti.Select(x => new SelectListItem() { Text = x.Ime+" "+x.Prezime, Value = x.ID.ToString() }))
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                <div class="row">
+                    <label class="col-form-label text-primary"><small>Progress:</small></label>
+                </div>
+                <div class="row">
+                    @Html.TextBoxFor(m => m.Progress, new { @type = "number", @class = "form-control", min = "0", max = "100" })
+                </div>
+            </div>*@
+                @*<div class="form-group">
+                <div class="row">
+                    <label class="col-form-label text-primary"><small>Status:</small></label>
+                </div>
+                <div class="row">
+                    @Html.DropDownListFor(x => x.Status, Model.Statuses.Select(x => new SelectListItem() { Text = x, Value = x.ToString(), Selected = Model.Status == x ? true : false }), "All statuses", new { @value = Model.Status, @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Status, "", new { @class = "errorMessage" })
+                </div>
+            </div>*@
+                <div class="form-group row">
+                    <div>
+
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

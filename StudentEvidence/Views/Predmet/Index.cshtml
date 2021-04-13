@@ -1,0 +1,35 @@
+﻿@model List<StudentEvidence.Models.PredmetModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    @Html.ActionLink("Dodaj Predmet", "AddPredmet", "Predmet", new { @class = "btn btn-info btn-sm" })
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Naziv</th> 
+            <th scope="col">Action</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th></th>
+                <th scope="row">@item.ID</th>
+                <th scope="row">@(item.Naziv)</th>  
+                <td>
+                    @Html.ActionLink("Edit", "EditPredmet", "Predmet", new { ID = item.ID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Delete", "DeletePredmet", "Predmet", new { ID = item.ID }, new { @class = "btn btn-danger btn-sm" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
